@@ -47,3 +47,5 @@ proxyTable: {
       }
     },
 # mongodb 集合名必须的是复数的，否则mongoose会找复数的集合，这样就要强制指定用collection集合名
+
+![架构图](http://a1.qpic.cn/psb?/V11FTuif2OYnQ5/9QFpxzx*Njg8CFjxC16c7c5n06CSXeak*izItwSs8ow!/b/dD4BAAAAAAAA&bo=aAT6AQAAAAADB7U!&rf=viewer_4)
