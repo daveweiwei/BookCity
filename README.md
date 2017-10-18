@@ -21,7 +21,7 @@ npm run build --report
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
 
 # 技术栈：
-ES6  + vue2.0 + vue-router + Vuex + axios + echarts + karma+Mocha + Node + express + koa + mongodb + mongoose + vue-cli
+ES6  + vue2.0 + vue-router + Vuex + axios + Node + express + mongodb + mongoose + vue-cli
 
 # express跨域:
 cors模块
