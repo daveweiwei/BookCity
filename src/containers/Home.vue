@@ -1,13 +1,13 @@
 <template>
   <div class="home">
     <router-view class="homebody"></router-view>
-    <FooterNav/>
+    <FooterNav v-if="footer"/>
   </div>
 </template>
 <script>
   import FooterNav from '../components/FooterNav.vue'
   import * as Types from '../vuexs/mutation-type'
-  import {mapMutations, mapActions} from 'vuex'
+  import {mapState,mapMutations, mapActions} from 'vuex'
   import axios from 'axios'
 
   export default {
@@ -30,6 +30,9 @@
     },
     components: {
       FooterNav
+    },
+    computed:{
+      ...mapState({footer:'footer_state'})
     }
   }
 

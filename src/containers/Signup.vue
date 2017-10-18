@@ -2,25 +2,25 @@
   <div class="Signup">
     <SignHeader/>
     <div class="Sign-body">
-      <input type="text" placeholder="邮箱/手机号" v-model="iemail">
-      <input type="text" placeholder="用户名" v-model="iname">
-      <input type="password" ref="pass" placeholder="密码" v-model="ipassword">
+      <input type="text" placeholder="邮箱/手机号" v-model="phone">
+      <input type="text" placeholder="用户名" v-model="showname">
+      <input type="password" ref="pass" placeholder="密码" v-model="password">
       <i @click="changeBlue" class="iconfont icon-yincangmima" :class="{icon_blue:iblue}"></i>
     </div>
-    <button @click="signup" class="butSign">注册</button>
+    <button @click.prevent="signup" class="butSign">注册</button>
   </div>
 </template>
 <script>
   import SignHeader from '../components/SignHeader.vue'
-
+  import axios from 'axios'
   export default {
     data() {
       return {
         iblue: false,//控制隐藏密码图标的显示
         inum: 0,//隐藏密码的计数器开关
-        iemail: '',//邮箱和手机号input
-        iname: '',//用户名input
-        ipassword: '',//密码input
+        phone: '',//邮箱和手机号input
+        showname: '',//用户名input
+        password: '',//密码input
       }
     },
     methods: {
@@ -36,6 +36,9 @@
         }
       },
       signup() {
+        axios.post('http://localhost:3000/api/users',{username:this.phone,passowrd:this.password,showname:this.showname}).then(res=>{
+          console.log(res.data)
+        });
         console.log('注册')
       }
     },

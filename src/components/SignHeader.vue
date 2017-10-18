@@ -1,14 +1,22 @@
 <template>
     <div class="Sign-header">
-      <router-link to="/"><i class="iconfont icon-fanhui"></i></router-link>
+      <a @click="goback"><i class="iconfont icon-fanhui"></i></a>
     </div>
 </template>
 <script>
+  import {mapActions} from 'vuex';
+  import * as Types from '../vuexs/mutation-type'
     export default {
         data() {
             return {}
         },
-        methods: {},
+        methods: {
+          ...mapActions({IActions:Types.FOOTERSTATUS}),
+          goback(){
+            this.IActions(true);
+            this.$router.push('/setme');
+          }
+        },
         components: {}
     }
 

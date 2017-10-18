@@ -7,10 +7,14 @@
       <i @click="changeBlue" class="iconfont icon-yincangmima" :class="{icon_blue:iblue}"></i>
     </div>
     <button @click="sigin" class="butSign">登陆</button>
+    <div class="sign">
+      <router-link to="/signup">sign up</router-link>
+    </div>
   </div>
 </template>
 <script>
   import SignHeader from '../components/SignHeader.vue'
+  import axios from 'axios'
 
   export default {
     data() {
@@ -34,8 +38,11 @@
         }
       },
       sigin() {
-        this.$router.push('/home');
-        console.log('登陆')
+        axios.post('/api/users',{imail:this.iemail,ipassword:this.ipassword}).then(res=>{
+          console.log(res.data)
+        });
+        //this.$router.push('/home');
+        //console.log('登陆')
       }
     },
     components: {
@@ -44,5 +51,17 @@
   }
 </script>
 <style scoped>
-
+  .sign{
+    width: 100%;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    line-height: 2.5;
+    font-size: 1.5rem;
+    text-align: right;
+    padding-right:1rem;
+  }
+  .sign a{
+    color: green;
+  }
 </style>
