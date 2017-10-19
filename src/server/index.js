@@ -2,8 +2,7 @@ let express = require('express');
 let cookieParser = require('cookie-parser');
 let bodyParser = require('body-parser');
 let cors = require('cors');
-let fs = require('fs');
-let path = require('path');
+
 let mongoose = require('mongoose');
 
 let app = express();
