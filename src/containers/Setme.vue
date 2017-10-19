@@ -1,16 +1,16 @@
 <template>
   <div class="setme">
-    <div class="setme_top" v-if="userstatus">
+    <div class="setme_top" v-if="utatus">
       <div class="setme_title">
         Melissa
         <i class="iconfont icon-shezhi"></i>
       </div>
-      <div class="setme_info">
+      <div class="setme_info" >
         <img src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=634098145,264198475&fm=27&gp=0.jpg">
         <span>编辑个人资料</span>
       </div>
     </div>
-    <div class="setme_login">
+    <div class="setme_login" v-if="!utatus">
       <i class="iconfont icon-yonghu-copy"></i>
       <span @click="change">登陆/注册</span>
     </div>
@@ -56,17 +56,19 @@
   </div>
 </template>
 <script>
-  import {mapActions} from 'vuex';
+  import {mapState, mapActions} from 'vuex';
   import * as Types from '../vuexs/mutation-type'
+
   export default {
     data() {
-      return {
-        userstatus: false //用户登陆状态
-      }
+      return {}
+    },
+    computed:{
+      ...mapState({utatus: 'user_status'}),
     },
     methods: {
-      ...mapActions({IActions:Types.FOOTERSTATUS}),
-      change(){
+      ...mapActions({IActions: Types.FOOTERSTATUS}),
+      change() {
         this.IActions(false);
         this.$router.push('/signin');
       }
@@ -173,25 +175,28 @@
     right: 2rem;
   }
 
-  .icon-jichutubiao_userfuben{
+  .icon-jichutubiao_userfuben {
     color: coral;
     font-size: 2rem;
   }
-  .icon-guanzhu{
+
+  .icon-guanzhu {
     color: orange;
     font-size: 2rem;
   }
 
-  .setme_footer div{
+  .setme_footer div {
     margin: 1rem 0;
     height: 5rem;
     line-height: 5rem;
     padding: 0 1rem;
   }
-  .icon-biji{
+
+  .icon-biji {
     color: #1afa29;
   }
-  .icon-shudan{
+
+  .icon-shudan {
     color: #1296db;
   }
 </style>

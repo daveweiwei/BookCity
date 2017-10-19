@@ -6,6 +6,9 @@ const mutations = {
   },
   [Types.FOOTERSTATUS](state, item) {  // 把获取的数据同步到仓库中
     state.footer_state = item
+  },
+  [Types.LOGINSTATA](state, item) {  // 把获取的数据同步到仓库中
+    state.user_status = item
   }
 }
 export default mutations

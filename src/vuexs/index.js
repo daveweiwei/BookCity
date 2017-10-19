@@ -7,7 +7,8 @@ Vue.use(Vuex);
 
 const state = {
   book_data: [], //书列表
-  token: null, //用户登陆状态
+  token: null, //记录cookis
+  user_status: false, //用户登陆状态
   footer_state:true // 隐藏footer组件
 };
 export default new Vuex.Store({

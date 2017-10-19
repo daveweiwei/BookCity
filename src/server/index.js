@@ -14,24 +14,25 @@ app.listen(3000);
 
 let conn = mongoose.createConnection('mongodb://localhost:27017/imooc');
 let presonSchema = new mongoose.Schema({
-  _id: mongoose.Schema.Types.ObjectId,
-  bookname: String,
-  bookimgs: String,
-  author: String,
-  visitor: String
-},
-{
-  collection: 'book'
-});
+    _id: mongoose.Schema.Types.ObjectId,
+    bookname: String,
+    bookimgs: String,
+    author: String,
+    visitor: String
+  },
+  {
+    collection: 'book'
+  });
 
 let userInfo = new mongoose.Schema({
-  username: String,
-  showname: String,
-  passowrd: Number
-},
-{
-  collection: 'users'
-});
+    username: String,
+    showname: String,
+    passowrd: Number,
+    userstate: Number
+  },
+  {
+    collection: 'users'
+  });
 
 let booksModel = conn.model('book', presonSchema);
 let usersModel = conn.model('users', userInfo);
@@ -50,16 +51,24 @@ function pullBookslist(req, res) {
 app.get('/api/books', pullBookslist);
 
 function addUsers(req, res) {
+  //获取post方法里的值，是一个对象
   let user = req.body;
-  console.log(user)
-  usersModel.create(user, function(error,doc){
-    if(error) {
-      console.log(error);
-    } else {
-      console.log(doc);
-    }
-  });
-  res.send('ok');
+  //判断post方法传的值如果有一个为空，就不允许保存数据
+  let oState = false;
+  oState = Object.values(user).every(itme => itme != '')
+  if (oState) {
+    user.userstate = 1;
+    usersModel.create(user, function (error, doc) {
+      if (error) {
+        console.log(error);
+      } else {
+        //res.cookie('encounter',user.username);
+        res.send({result: 0})
+      }
+    });
+  } else {
+    res.send({result: 1})//如果有为空的字段，那么就返回1，保存失败
+  }
 }
 
 app.post('/api/users', addUsers);

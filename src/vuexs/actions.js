@@ -6,6 +6,9 @@ const actions = {
   },
   [Types.FOOTERSTATUS]({commit}, item) {
     commit(Types.FOOTERSTATUS, item)
+  },
+  [Types.LOGINSTATA]({commit}, item) {
+    commit(Types.LOGINSTATA, item)
   }
 };
 

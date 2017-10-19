@@ -12,7 +12,10 @@
 </template>
 <script>
   import SignHeader from '../components/SignHeader.vue'
+  import * as Types from '../vuexs/mutation-type'
+  import {mapActions} from 'vuex'
   import axios from 'axios'
+
   export default {
     data() {
       return {
@@ -24,6 +27,8 @@
       }
     },
     methods: {
+      ...mapActions({IActions: Types.FOOTERSTATUS}),
+      ...mapActions({AIctions: Types.LOGINSTATA}),
       changeBlue() {
         if (!this.inum) {
           this.iblue = true
@@ -36,10 +41,18 @@
         }
       },
       signup() {
-        axios.post('http://localhost:3000/api/users',{username:this.phone,passowrd:this.password,showname:this.showname}).then(res=>{
-          console.log(res.data)
+        axios.post('http://localhost:3000/api/users', {
+          username: this.phone,
+          passowrd: this.password,
+          showname: this.showname
+        }).then(res => {
+          if (res.data.result == 0) {
+            this.IActions(true);
+            this.AIctions(true);
+            this.$router.push('/setme');
+            console.log('注册')
+          }
         });
-        console.log('注册')
       }
     },
     components: {
