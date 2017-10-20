@@ -4,3 +4,5 @@ export const PULLDATA = 'PULLDATA';
 export const FOOTERSTATUS = 'FOOTERSTATUS';
 //更改登陆状态
 export const LOGINSTATA = 'LOGINSTAT';
+//获取用户信息
+export const USERINFO = 'USERINFO';

@@ -17,42 +17,43 @@ export default new Router({
     {
       path: '/',
       name: 'login',
-      component:Login
+      component: Login
     },
     {
       path: '/home',
       name: 'home',
-      component:Home
+      component: Home
     },
     {
       path: '/signup',
       name: 'signup',
-      component:Signup
+      component: Signup
     },
     {
       path: '/signin',
       name: 'signin',
-      component:Signin
+      component: Signin
     },
     {
       path: '/findlist',
       name: 'findlist',
-      component:Findlist,
+      component: Findlist,
     },
     {
       path: '/bookrack',
       name: 'bookrack',
-      component:Bookrack,
+      component: Bookrack,
     },
     {
       path: '/idea',
       name: 'idea',
-      component:Idea,
+      component: Idea,
     },
     {
       path: '/setme',
       name: 'setme',
-      component:Setme,
+      component: Setme,
+      params: true
     }
   ]
 })

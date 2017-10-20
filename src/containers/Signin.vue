@@ -2,8 +2,8 @@
   <div>
     <SignHeader/>
     <div class="Sign-body">
-      <input type="text" placeholder="邮箱/手机号" v-model="iemail">
-      <input type="password" ref="pass" placeholder="密码" v-model="ipassword">
+      <input type="text" placeholder="邮箱/手机号" v-model="phone">
+      <input type="password" ref="pass" placeholder="密码" v-model="password">
       <i @click="changeBlue" class="iconfont icon-yincangmima" :class="{icon_blue:iblue}"></i>
     </div>
     <button @click="sigin" class="butSign">登陆</button>
@@ -14,6 +14,8 @@
 </template>
 <script>
   import SignHeader from '../components/SignHeader.vue'
+  import * as Types from '../vuexs/mutation-type'
+  import {mapActions} from 'vuex'
   import axios from 'axios'
 
   export default {
@@ -21,11 +23,14 @@
       return {
         iblue: false,//控制隐藏密码图标的显示
         inum: 0,//隐藏密码的计数器开关
-        iemail: '',//邮箱和手机号input
-        ipassword: '',//密码input
+        phone: '',//邮箱和手机号input
+        password: '',//密码input
       }
     },
     methods: {
+      ...mapActions({IActions: Types.FOOTERSTATUS}),
+      ...mapActions({AIctions: Types.LOGINSTATA}),
+      ...mapActions({Auers: Types.USERINFO}),
       changeBlue() {
         if (!this.inum) {
           this.iblue = true;
@@ -38,11 +43,15 @@
         }
       },
       sigin() {
-        axios.post('/api/users',{imail:this.iemail,ipassword:this.ipassword}).then(res=>{
-          console.log(res.data)
+        axios.post('http://localhost:3000/api/login', {username: this.phone, password: this.password}).then(res => {
+          if (res.data.result == 0) {
+            this.IActions(true);
+            this.AIctions(true);
+            this.Auers(res.data.userInfolist);
+            this.$router.push('/setme');
+            console.log('登陆')
+          }
         });
-        //this.$router.push('/home');
-        //console.log('登陆')
       }
     },
     components: {
@@ -51,7 +60,7 @@
   }
 </script>
 <style scoped>
-  .sign{
+  .sign {
     width: 100%;
     position: absolute;
     left: 0;
@@ -59,9 +68,10 @@
     line-height: 2.5;
     font-size: 1.5rem;
     text-align: right;
-    padding-right:1rem;
+    padding-right: 1rem;
   }
-  .sign a{
+
+  .sign a {
     color: green;
   }
 </style>

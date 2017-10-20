@@ -2,10 +2,10 @@
   <div class="setme">
     <div class="setme_top" v-if="utatus">
       <div class="setme_title">
-        Melissa
+        {{name || 小羊羊}}
         <i class="iconfont icon-shezhi"></i>
       </div>
-      <div class="setme_info" >
+      <div class="setme_info">
         <img src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=634098145,264198475&fm=27&gp=0.jpg">
         <span>编辑个人资料</span>
       </div>
@@ -20,21 +20,21 @@
             <i class="iconfont icon-zhanghu"></i>
             <span>账户</span>
           </span>
-        <span class="rightinfo">18</span>
+        <span class="rightinfo">{{infolist ? infolist.balance : 0}}</span>
       </div>
       <div class="setmerow">
           <span>
             <i class="iconfont icon-jichutubiao_userfuben"></i>
             <span>好友排行</span>
           </span>
-        <span class="rightinfo">第2名</span>
+        <span class="rightinfo">第{{infolist ? infolist.ranking : 0}}名</span>
       </div>
       <div class="setmerow">
           <span>
             <i class="iconfont icon-guanzhu"></i>
             <span>关注</span>
           </span>
-        <span class="rightinfo">已关注15人</span>
+        <span class="rightinfo">已关注{{infolist ? infolist.attention : 0}}人</span>
       </div>
     </div>
     <div class="setme_footer">
@@ -43,14 +43,14 @@
             <i class="iconfont icon-biji"></i>
             <span>笔记</span>
           </span>
-        <span class="rightinfo">0个</span>
+        <span class="rightinfo">{{infolist ? infolist.note : 0}}个</span>
       </div>
       <div class="setmerow">
           <span>
             <i class="iconfont icon-shudan"></i>
             <span>书单</span>
           </span>
-        <span class="rightinfo">1个</span>
+        <span class="rightinfo">{{infolist ? infolist.booklist : 0}}个</span>
       </div>
     </div>
   </div>
@@ -61,16 +61,31 @@
 
   export default {
     data() {
-      return {}
+      return {
+        name: '',
+        infolist: null
+      }
     },
-    computed:{
+    created() {
+      this.pullInfo()
+    },
+    computed: {
       ...mapState({utatus: 'user_status'}),
+      ...mapState({uinfostate: 'user_info'})
     },
     methods: {
       ...mapActions({IActions: Types.FOOTERSTATUS}),
       change() {
         this.IActions(false);
         this.$router.push('/signin');
+      },
+      pullInfo() {
+        if (this.utatus) {
+          let iArray = null;
+          this.name = (this.uinfostate)[0].showname;
+          iArray = (this.uinfostate)[0].userinfo;
+          this.infolist = iArray[0]
+        }
       }
     },
     components: {}

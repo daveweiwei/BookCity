@@ -9,6 +9,9 @@ const actions = {
   },
   [Types.LOGINSTATA]({commit}, item) {
     commit(Types.LOGINSTATA, item)
+  },
+  [Types.USERINFO]({commit}, item) {
+    commit(Types.USERINFO, item)
   }
 };
 
